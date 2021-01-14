@@ -25,8 +25,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        val fuji = LatLng(35.3606, 138.7274)
-        mMap.addMarker(MarkerOptions().position(fuji).title("富士山").snippet("富士山は日本で一番高い山です."))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(fuji, 9.0f))
+        with(mMap) {
+            val fuji = LatLng(35.3606, 138.7274)
+            addMarker(MarkerOptions().position(fuji).title("富士山").snippet("富士山は日本で一番高い山です."))
+            moveCamera(CameraUpdateFactory.newLatLngZoom(fuji, 9.0f))
+            // Note: カスタム情報ウィンドウの設定
+            setInfoWindowAdapter(CustomInfoWindowAdapter(this@MapsActivity))
+        }
     }
 }
